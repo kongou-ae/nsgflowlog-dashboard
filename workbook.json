@@ -12,9 +12,6 @@
       "type": 9,
       "content": {
         "version": "KqlParameterItem/1.0",
-        "crossComponentResources": [
-          "{Subscription}"
-        ],
         "parameters": [
           {
             "id": "ecbe60a5-5e4c-47b7-b2b2-7607343617c8",
@@ -38,7 +35,7 @@
             "name": "workspace",
             "type": 5,
             "isRequired": true,
-            "query": "resources\r\n| where type == \"microsoft.operationalinsights/workspaces\"",
+            "query": "resources\r\n| where type == \"microsoft.operationalinsights/workspaces\"\r\n| project id",
             "crossComponentResources": [
               "{Subscription}"
             ],
@@ -50,7 +47,8 @@
               "durationMs": 86400000
             },
             "queryType": 1,
-            "resourceType": "microsoft.operationalinsights/workspaces"
+            "resourceType": "microsoft.resourcegraph/resources",
+            "value": null
           },
           {
             "id": "5c0b55c5-b6c0-43f1-9481-ae0bfe522071",
@@ -117,7 +115,7 @@
           }
         ],
         "style": "pills",
-        "queryType": 1,
+        "queryType": 0,
         "resourceType": "microsoft.operationalinsights/workspaces"
       },
       "name": "パラメーター - 3"
