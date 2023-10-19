@@ -12,6 +12,9 @@
       "type": 9,
       "content": {
         "version": "KqlParameterItem/1.0",
+        "crossComponentResources": [
+          "{Subscription}"
+        ],
         "parameters": [
           {
             "id": "ecbe60a5-5e4c-47b7-b2b2-7607343617c8",
@@ -21,12 +24,13 @@
             "isRequired": true,
             "typeSettings": {
               "additionalResourceOptions": [],
-              "includeAll": true
+              "includeAll": true,
+              "showDefault": false
             },
             "timeContext": {
               "durationMs": 86400000
             },
-            "value": "/subscriptions/aa9de0c7-adae-4ccc-b041-e4720761aa65"
+            "value": null
           },
           {
             "id": "0eb5f393-3971-4506-aad2-9f1a47807ebe",
@@ -39,14 +43,14 @@
               "{Subscription}"
             ],
             "typeSettings": {
-              "additionalResourceOptions": []
+              "additionalResourceOptions": [],
+              "showDefault": false
             },
             "timeContext": {
               "durationMs": 86400000
             },
             "queryType": 1,
-            "resourceType": "microsoft.resourcegraph/resources",
-            "value": "/subscriptions/aa9de0c7-adae-4ccc-b041-e4720761aa65/resourceGroups/labnet/providers/Microsoft.OperationalInsights/workspaces/lab-je-log"
+            "resourceType": "microsoft.operationalinsights/workspaces"
           },
           {
             "id": "5c0b55c5-b6c0-43f1-9481-ae0bfe522071",
@@ -113,7 +117,7 @@
           }
         ],
         "style": "pills",
-        "queryType": 0,
+        "queryType": 1,
         "resourceType": "microsoft.operationalinsights/workspaces"
       },
       "name": "パラメーター - 3"
