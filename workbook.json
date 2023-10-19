@@ -48,12 +48,13 @@
             },
             "queryType": 1,
             "resourceType": "microsoft.resourcegraph/resources",
-            "value": null
+            "value": "/subscriptions/aa9de0c7-adae-4ccc-b041-e4720761aa65/resourceGroups/labnet/providers/Microsoft.OperationalInsights/workspaces/lab-je-log"
           },
           {
             "id": "5c0b55c5-b6c0-43f1-9481-ae0bfe522071",
             "version": "KqlParameterItem/1.0",
             "name": "TimeRange_p",
+            "label": "TimeRange",
             "type": 4,
             "isRequired": true,
             "typeSettings": {
@@ -107,11 +108,7 @@
             },
             "timeContext": {
               "durationMs": 86400000
-            },
-            "value": {
-              "durationMs": 2592000000
-            },
-            "label": "TimeRange"
+            }
           }
         ],
         "style": "pills",
@@ -147,7 +144,7 @@
               "durationMs": 86400000
             },
             "timeContextFromParameter": "Duration",
-            "value": "52"
+            "value": ""
           },
           {
             "id": "d2817199-5f21-4885-94e1-73010f6172a3",
@@ -226,7 +223,7 @@
       "content": {
         "version": "KqlItem/1.0",
         "query": "AzureNetworkAnalytics_CL\n| where SubType_s == \"FlowLog\"\n| extend SrcIP = iff(isempty(SrcIP_s), split(SrcPublicIPs_s, \"|\")[0], SrcIP_s)\n| extend DestIP = iff(isempty(DestIP_s), split(DestPublicIPs_s, \"|\")[0], DestIP_s)\n| extend Status = case(FlowStatus_s == \"A\", \"Accept\", FlowStatus_s == \"D\", \"Deny\", \"unknown\")\n| extend Protocol = case(L4Protocol_s == \"T\", \"TCP\", L4Protocol_s == \"U\", \"UDP\", \"unknown\") \n| extend NSGList_s_array = split(NSGList_s,\"/\")\n| extend NsgId = strcat(\"/subscriptions/\", NSGList_s_array[0], \"/resourcegroups/\", NSGList_s_array[1], \"/providers/Microsoft.Network/networkSecurityGroups/\", NSGList_s_array[2]) \n| extend DestPort = replace(@'\\.0',@'', tostring(DestPort_d))\n| project FlowStartTime = FlowStartTime_t, SrcIP, DestIP, Protocol, DestPort, Status, NsgId, NSGRule_s\n| where FlowStartTime {TimeRange_p}\n| where Status in ({Status_p})\n| where SrcIP like '{SrcIP_p}'\n| where DestIP like '{DestIP_p}'\n| where DestPort like '{Port_p}'\n| where Protocol in ({Protocol_p})\n| sort by FlowStartTime desc",
-        "size": 0,
+        "size": 2,
         "showAnalytics": true,
         "timeContextFromParameter": "TimeRange_p",
         "showExportToExcel": true,
